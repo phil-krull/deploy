@@ -25,7 +25,7 @@ SECRET_KEY = 'ej@npmtvr25^wm=6f#2fv-4_cm!^8k-$1obff4=qq=ggql@=s_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['18.208.212.29']
+ALLOWED_HOSTS = ['54.225.27.63']
 
 
 # Application definition
