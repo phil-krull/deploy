@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Dojo</h1>
+    <form action="/test/dojos" method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <br>
+        <input type="text" name="name" id="name">
+        <br>
+        <label for="description">Description:</label>
+        <br>
+        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+        <br>
+        <button>Add Dojo</button>
+    </form>
+    {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <hr>
+    <h1>All Dojos</h1>
+    <h4># of Dojos: {{ all_dojos.count }}</h4>
+    <ul>
+        {% for dojo in all_dojos %}
+            <li>{{ dojo.name }}, students attending:
+                <ul>
+                    {% for student in dojo.Students.all %}
+                        <li>{{ student.name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h1>All Students</h1>
+    <h4># of Students: {{ all_students.count }}</h4>
+    <ul>
+        {% for student in all_students %}
+            <li>id: {{ student.id }} {{ student.name }} belongs to: {{ student.dojo.name }}, has visited:
+                <ul>
+                    {% for dojo in student.visited.all %}
+                        <li>{{ dojo.name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
